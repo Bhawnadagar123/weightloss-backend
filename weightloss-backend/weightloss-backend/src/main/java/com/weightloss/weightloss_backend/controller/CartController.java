@@ -10,6 +10,7 @@ import com.weightloss.weightloss_backend.service.CartService;
 
 @RestController
 @RequestMapping("/api/cart")
+@CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
 public class CartController {
 
     private final CartService cartService;

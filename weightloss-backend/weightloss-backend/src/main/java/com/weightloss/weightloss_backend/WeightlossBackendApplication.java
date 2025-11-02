@@ -7,5 +7,5 @@ public class WeightlossBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WeightlossBackendApplication.class, args);
-	} 
-}
+	}   
+} 

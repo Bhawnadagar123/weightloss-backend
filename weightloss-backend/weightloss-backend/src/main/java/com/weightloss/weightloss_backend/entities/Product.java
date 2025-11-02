@@ -1,6 +1,9 @@
 package com.weightloss.weightloss_backend.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +35,15 @@ public class Product {
     @NotNull(message = "Stock is required")
     @Min(value = 0, message = "Stock cannot be negative")
     private Integer stock;
+    
+    private double mrp;  // ✅ New field for MRP
+
+ // New: image filenames or URLs stored as strings (e.g., "/uploads/products/abc.jpg")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "image_url")
+    private List<String> images = new ArrayList<>();
+
 
     private String category;
 
@@ -91,14 +103,36 @@ public class Product {
 		this.category = category;
 	}
 
-	public Product(String name, String description, String subDescription, Double price, Integer stock,
-			String category) {
+	public double getMrp() {
+		return mrp;
+	}
 
+	public void setMrp(double mrp) {
+		this.mrp = mrp;
+	}
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
+	}
+
+	public Product(Long id, @NotBlank(message = "Product name is required") String name, String description,
+			String subDescription,
+			@NotNull(message = "Price is required") @Min(value = 1, message = "Price must be greater than 0") Double price,
+			@NotNull(message = "Stock is required") @Min(value = 0, message = "Stock cannot be negative") Integer stock,
+			double mrp, List<String> images, String category) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.subDescription = subDescription;
 		this.price = price;
 		this.stock = stock;
+		this.mrp = mrp;
+		this.images = images;
 		this.category = category;
 	}
 
