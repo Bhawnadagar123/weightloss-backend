@@ -82,7 +82,7 @@ public class OrderService {
 
         order.setTotalAmount(grandTotal);
 
-        // set initial status depending on paymentMethod
+        // set initial status de   pending on paymentMethod
         if ("ONLINE".equalsIgnoreCase(paymentMethod)) {
             order.setStatus(OrderStatus.PENDING_PAYMENT);
             // create payment session with gateway and return payment URL/info (not implemented here)
@@ -99,7 +99,9 @@ public class OrderService {
 
         return toOrderResponse(saved);
     }
-
+    
+   
+   
     /**
      * Place order from explicit items passed by client (re-validate price & stock).
      */

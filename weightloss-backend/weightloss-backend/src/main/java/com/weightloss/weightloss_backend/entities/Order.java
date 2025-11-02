@@ -26,10 +26,10 @@ public class Order {
 
     @Column(name = "total_amount", nullable = false, precision = 12, scale = 2)
     private BigDecimal totalAmount = BigDecimal.ZERO;
-
+   
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PROCESSING;
-
+    
     @Column(name = "payment_method")
     private String paymentMethod; // "COD" or "ONLINE"
 
