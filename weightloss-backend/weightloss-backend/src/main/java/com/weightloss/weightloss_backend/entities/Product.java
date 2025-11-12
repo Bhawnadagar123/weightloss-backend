@@ -119,27 +119,5 @@ public class Product {
 		this.images = images;
 	}
 
-	public Product(Long id, @NotBlank(message = "Product name is required") String name, String description,
-			String subDescription,
-			@NotNull(message = "Price is required") @Min(value = 1, message = "Price must be greater than 0") Double price,
-			@NotNull(message = "Stock is required") @Min(value = 0, message = "Stock cannot be negative") Integer stock,
-			double mrp, List<String> images, String category) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.subDescription = subDescription;
-		this.price = price;
-		this.stock = stock;
-		this.mrp = mrp;
-		this.images = images;
-		this.category = category;
-	}
-
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	
 }

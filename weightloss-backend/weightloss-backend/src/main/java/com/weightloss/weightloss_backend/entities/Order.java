@@ -129,21 +129,7 @@ public class Order {
 		this.createdAt = createdAt;
 	}
 
-	public Order(Long id, Long userId, BigDecimal totalAmount, OrderStatus status, String paymentMethod,
-			String paymentReference, List<OrderItem> items, String shippingAddress, Instant createdAt,
-			Instant updatedAt) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.totalAmount = totalAmount;
-		this.status = status;
-		this.paymentMethod = paymentMethod;
-		this.paymentReference = paymentReference;
-		this.items = items;
-		this.shippingAddress = shippingAddress;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
+	
 
 	public Instant getUpdatedAt() {
 		return updatedAt;
@@ -153,10 +139,7 @@ public class Order {
 		this.updatedAt = updatedAt;
 	}
 
-	public Order() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
     // getters & setters omitted for brevity
 }

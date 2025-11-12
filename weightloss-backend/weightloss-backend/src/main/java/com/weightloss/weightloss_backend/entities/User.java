@@ -5,7 +5,6 @@ import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 @Entity
 @Table(name = "users")
 @Data
@@ -30,10 +29,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
 
-    public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+   
 
 	public Long getId() {
 		return id;
@@ -74,19 +70,6 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
-	public User(Long id, String name, String email, String password, Set<Role> roles) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.roles = roles;
-	}
-
-	
-
-	
 
 	
 }

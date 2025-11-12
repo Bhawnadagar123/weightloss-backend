@@ -23,7 +23,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/orders")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
 public class OrderController {
 
