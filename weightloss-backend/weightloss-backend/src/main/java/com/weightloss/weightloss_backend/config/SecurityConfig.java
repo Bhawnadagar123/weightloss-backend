@@ -65,7 +65,7 @@ public class SecurityConfig {
                 // public endpoints (dev)
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/cart/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/products/**", "/api/blog/**", "/api/blogs/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/products/**", "/api/blog/**", "/api/blogs/**", "/files/**").permitAll()
 
                 // everything else requires auth
                 .anyRequest().authenticated()
