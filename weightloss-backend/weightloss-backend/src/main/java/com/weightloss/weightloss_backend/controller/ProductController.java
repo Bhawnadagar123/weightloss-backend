@@ -20,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
+//@CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
 public class ProductController {
 
 	

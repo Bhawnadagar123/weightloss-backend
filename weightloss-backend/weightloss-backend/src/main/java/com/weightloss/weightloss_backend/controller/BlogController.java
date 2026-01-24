@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/blogs")
-@CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
+//@CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
 public class BlogController {
 
     private final BlogService svc;

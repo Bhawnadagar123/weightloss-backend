@@ -23,7 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/orders")
-@CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
+//@CrossOrigin(origins = "http://localhost:4200") // allow Angular during dev
 public class OrderController {
 
     private final OrderService svc;

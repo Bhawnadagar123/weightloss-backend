@@ -27,19 +27,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .setCachePeriod(3600);
     }
     
- // in a @Configuration class
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-      return new WebMvcConfigurer() {
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-        	registry.addMapping("/api/**")                 // restrict to your API paths
-            .allowedOrigins("http://localhost:4200")
-            .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
-            .allowedHeaders("*")
-            .allowCredentials(true)
-            .maxAge(3600);
-        }
-      };
-    }
+ 
 }

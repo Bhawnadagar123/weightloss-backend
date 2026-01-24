@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -38,7 +39,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("http://localhost:4200"));
+        cfg.setAllowedOrigins(List.of(
+//        		"http://localhost:4200"
+        		"https://www.ayursherbals.com",
+                "https://ayursherbals.com"
+        		));
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));
         cfg.setAllowCredentials(true);
@@ -50,30 +55,40 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // Jwt filter - if you don't have working implementation temporarily comment out the line that adds it.
-        JwtAuthenticationFilter jwtFilter = new JwtAuthenticationFilter(jwtUtil, userDetailsService);
+
+        JwtAuthenticationFilter jwtFilter =
+                new JwtAuthenticationFilter(jwtUtil, userDetailsService);
 
         http
-            .cors().and()                          // IMPORTANT: enable CORS handling by spring security
-            .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+            .cors(Customizer.withDefaults())
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(sm ->
+                sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
             .authorizeHttpRequests(auth -> auth
-                // allow preflight
+
+                // ✅ ALWAYS allow preflight
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                // public endpoints (dev)
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/cart/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/products/**", "/api/blog/**", "/api/blogs/**", "/files/**").permitAll()
+                // ✅ PUBLIC APIs
+                .requestMatchers(
+                    "/api/products/**",
+                    "/api/blogs/**",
+                    "/api/blog/**",
+                    "/api/cart/**",
+                    "/api/auth/**",
+                    "/files/**",
+                    "/actuator/**"
+                ).permitAll()
 
-                // everything else requires auth
+                // 🔒 everything else needs JWT
                 .anyRequest().authenticated()
             );
 
-        // if your jwtFilter is not ready, comment out the next line:
+        // ✅ IMPORTANT: add JWT filter AFTER permitting public endpoints
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 }
